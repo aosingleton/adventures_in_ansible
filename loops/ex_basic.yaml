@@ -1,0 +1,31 @@
+# script uses loop to perform task iteratively
+# simple example1 calls loop with values defined immediately
+# complex example includes a reference to an array variable
+-
+  name: Create users
+  hosts: localhost
+  # required for more complex addition of code and installation of packages
+  vars:
+    packages:
+      - name: nginx
+        required: True
+      - name: mysql
+        required: False
+
+  tasks:
+    # simple example that creates user if present with the user module
+    # present state is indempotent so it checks for presence before trying to create
+    - user: name='{{ item.name }}' state=present uuid='{{ item.uuid }}'
+      loop:
+        - name: joe
+          uuid: 101
+        - name: mary
+          uuid: 102
+  
+    # complex example that works through package list and installs on system
+    - name: Install '{{ item.name }}' on REDHAT system
+      yum:
+        item:
+          name: '{{ item.name }}'
+          state: present
+      when: item.required == True
