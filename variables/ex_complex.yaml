@@ -1,0 +1,28 @@
+# playbook uses variables that pull from inventory file containing server/ host information
+- 
+  name: Set firewall config
+  hosts: web
+  vars: 
+    command1: 'echo "Hello"'
+  tasks:
+    -
+      command: {{ command1    }}
+    - firewald: 
+        service: https
+        permanent: true
+        state: enabled
+
+    - firewalld:
+        port: '{{ http_post }}'/tcp
+        permanent: true
+        state: enabled
+    
+    - firewalld:
+        port: '{{ snmp_post }}'/udp
+        permanent: true
+        state: enabled
+
+    - firewalld:
+        port: '{{ inter_ipppp_range }}'/24
+        permanent: true
+        state: enabled

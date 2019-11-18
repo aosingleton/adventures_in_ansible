@@ -1,0 +1,24 @@
+# this is an example using the command module that takes in free form information
+# some modules take different kinds of information
+-
+  name: Play 1
+  hosts: localhost
+  tasks:
+    - name: Execute command 'data'
+    command: date
+
+    - name: Display resolv.conf contents
+      command: cat /etc/resolv.conf
+    
+    # written a different way
+    # command makes sure we move to the etc file first
+    - name: Display resolv.conf contents
+      commnd: cat resolv.conf chdir=/etc
+
+    # creates command creates folder if it does not  exist already
+    - name: Display resolv.conf contents
+      command: mkdir /folder creates=/folder
+    
+    - name: Copy a file
+      copy: src=source_file dest=/destination
+

@@ -1,0 +1,18 @@
+# inventory file uses a variable that updates information for servers using variables
+# script uses lineinfile module to update a file
+sample file:
+  /etc/resolv.conf
+  server1 10.1.250.1
+  server2 10.1.250.2
+
+# playbook example to add a line in a file that includes a variable
+-
+  name: Add DNS server to resolv.conf
+  hosts: localthost
+  vars: 
+    dns_server: 10.1.250.10
+
+  tasks:
+    - lineinfile: 
+      path: /etc/resolv.conf
+      line: 'nameserver1 {{ dns_server }}'

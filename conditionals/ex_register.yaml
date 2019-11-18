@@ -1,0 +1,14 @@
+# scripts uses register module to take output of a command to use with a conditional
+- 
+  name: Check status of as service
+  hosts: localhost
+  tasks:
+    - command: service httpd status
+      register: result
+    
+    - mail:
+      to: admin@company.com
+      subject: Service Alert
+      body: Httpd service is down
+      # conditional based on result of service status check
+      when: result.stdout.find('down') != -1

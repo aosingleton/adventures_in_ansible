@@ -1,0 +1,7 @@
+# script module copies script and runs it on other machines.
+- 
+  name: Script play 1
+  hosts: localhost
+  tasks:
+    - name: Run a script
+      script: /etc/importantScript.sh -arg1 -arg2

@@ -1,0 +1,22 @@
+# script would install nginx.  Note that syntax include the term present which is indempotent
+---
+- name: Install nginx
+  hosts:
+  tasks:
+    - name: Install nginix on a debian server
+      # apt is specific to debian
+      apt:
+        name: nginx
+        state: present
+      # conditional using complext logic (and)
+      when: ansible_os_family == 'Debian' and 
+            ansible_distribution_versiokn == '16.04'
+
+  - name: Install nginix on a debian server
+      # installation call specific to redhat
+      yum:
+        name: nginx
+        state: present
+      # conditional using complex logic (or)
+      when: ansible_os_family == 'Redhat' or
+            when: ansible_os_family == 'SUSEEE'

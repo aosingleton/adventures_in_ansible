@@ -1,0 +1,18 @@
+Modules:
+  System:
+  Are command set that impact certain elements of machines.
+    Examples:
+      Adding users
+      Starting services
+
+  Commands:
+    Allow you to run commands or shell scripts
+  
+  Files:
+    Allows you to save, find, replace, modify files etc.
+
+  Database:
+    Allows you to add dbs like mongo, mysql, postsql, etc.
+
+  Cloud:
+    Allow you to work with specific cloud providers.

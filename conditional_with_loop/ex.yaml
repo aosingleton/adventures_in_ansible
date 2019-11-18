@@ -1,0 +1,63 @@
+# script would install multiple packages.  
+---
+- name: Install Packages
+  hosts: all
+  vars: 
+    packages:
+      - name: nginx
+        required: True
+      - name: mysql
+        required: True
+    - name: apache
+        required: False
+
+  tasks:
+    # below loop is actually equivallent to 3 separate tasks
+    - name: Install '{{ item.name }}' on system
+      apt: 
+        name: '{{ item.name }}'
+        state: present
+      when: item.required == True
+
+      # critical part is the loop syntax
+      # as python package the file loops based on number of items in array
+      # here array is set to the list of packages
+      loop: '{{ packages }}'
+      
+    # 
+    #
+    #
+    # tasks if done manually
+    - name: Install '{{ item.name }|'
+      vars: 
+        item: 
+          name: nginx
+          required: True
+      apt: 
+        name: '{{ item.name }}'
+        required: True
+      when: item.required == True
+
+      - name: Install '{{ item.name }|'
+      vars: 
+        item: 
+          name: mysql
+          required: True
+      apt: 
+        name: '{{ item.name }}'
+        required: True
+      when: item.required == True
+
+    - name: Install '{{ item.name }'
+      vars: 
+        item: 
+          name: apache
+          required: True
+      apt: 
+        name: '{{ item.name }}'
+        required: True
+      when: item.required == True
+      #
+      #
+      #
+      #

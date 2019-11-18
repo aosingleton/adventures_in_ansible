@@ -1,0 +1,15 @@
+# script uses lineinfile module to update a file
+sample file:
+  /etc/resolv.conf
+  server1 10.1.250.1
+  server2 10.1.250.2
+
+# playbook example to add a line in a file
+# command adds information to a file if it does not exist already.  Considered imdempotent so repeated actions do not change end state
+-
+  name: Add DNS server to resolv.conf
+  hosts: localthost
+  tasks:
+    - lineinfile: 
+      path: /etc/resolv.conf
+      line: 'nameserver1 10.1.250.10'
